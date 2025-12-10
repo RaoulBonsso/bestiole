@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import joyboy.bestiole.repository.PersonRepository;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -147,5 +148,53 @@ public class StartUp implements CommandLineRunner {
         System.out.println("\n========================");
         System.out.println("===   TP TERMINÉ !   ===");
         System.out.println("========================\n");
+
+
+        System.out.println("\n========================");
+        System.out.println("===   DEBUT TP04  ===");
+        System.out.println("========================\n");
+
+
+        System.out.println("=== TEST SPECIES ===");
+
+        System.out.println("findFirstByCommonName('Dragon') : ");
+        System.out.println(speciesRepo.findFirstByCommonName("Dragon"));
+
+        System.out.println("findByLatinNameContainingIgnoreCase('dra') : ");
+        speciesRepo.findByLatinNameContainingIgnoreCase("dra")
+                .forEach(System.out::println);
+
+        System.out.println("=== TEST PERSON ===");
+
+        System.out.println("findByLastnameOrFirstname('Dupond', 'Jean') : ");
+        personRepo.findByLastnameOrFirstname("Dupond", "Jean")
+                .forEach(System.out::println);
+
+        System.out.println("findByAgeGreaterThanEqual(30) : ");
+        personRepo.findByAgeGreaterThanEqual(30)
+                .forEach(System.out::println);
+
+
+        System.out.println("=== TEST ANIMAL ===");
+
+        Species spDragon = speciesRepo.findFirstByCommonName("Dragon");
+
+        System.out.println("findBySpecies(spDragon) : ");
+        animalRepo.findBySpecies(spDragon)
+                .forEach(System.out::println);
+
+        System.out.println("findByColorIn([\"Blue\", \"Green\"]) : ");
+        animalRepo.findByColorIn(Arrays.asList("Blue", "Green"))
+                .forEach(System.out::println);
+
+
+        System.out.println("\n========================");
+        System.out.println("===   TP04 TERMINÉ !   ===");
+        System.out.println("========================\n");
+
+
+
+
     }
+
 }
