@@ -195,6 +195,55 @@ public class StartUp implements CommandLineRunner {
 
 
 
+
+        System.out.println("\n=============================");
+        System.out.println("===       TP05 TESTS       ===");
+        System.out.println("=============================\n");
+
+
+        System.out.println("=== TEST SPECIES ===");
+        System.out.println("1) Species triées par nom commun ASC : ");
+        speciesRepo.findAllOrderedByCommonNameAsc()
+                .forEach(System.out::println);
+
+        System.out.println("\n2) Species LIKE 'ra' : ");
+        speciesRepo.searchByCommonNameLike("ra")
+                .forEach(System.out::println);
+
+
+
+        System.out.println("=== TEST PERSON ===");
+        System.out.println("\n3) Persons with age between 20 and 40 : ");
+        personRepo.findByAgeBetween(20, 40)
+                .forEach(System.out::println);
+
+        Animal firstAnimal = animalRepo.findAll().isEmpty() ? null : animalRepo.findAll().get(0);
+
+        if (firstAnimal != null) {
+            System.out.println("\n4) Persons owning the animal : " + firstAnimal.getName());
+            personRepo.findPersonsWhoOwn(firstAnimal)
+                    .forEach(System.out::println);
+        }
+
+
+
+        System.out.println("=== TEST ANIMAL ===");
+
+        System.out.println("\n5) Count of male animals (sex = 'M') : ");
+        System.out.println(animalRepo.countBySex("M"));
+
+        if (firstAnimal != null) {
+            System.out.println("\n6) Is animal '" + firstAnimal.getName() + "' owned ? ");
+            System.out.println(animalRepo.isOwned(firstAnimal));
+        }
+
+
+        System.out.println("\n=============================");
+        System.out.println("===       TP05 TERMINE !       ===");
+        System.out.println("=============================\n");
+
+
+
     }
 
 }
