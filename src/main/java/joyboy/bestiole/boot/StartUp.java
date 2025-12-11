@@ -1,5 +1,6 @@
 package joyboy.bestiole.boot;
 
+import jakarta.transaction.Transactional;
 import joyboy.bestiole.entities.Animal;
 import joyboy.bestiole.entities.Person;
 import joyboy.bestiole.entities.Role;
@@ -33,6 +34,7 @@ public class StartUp implements CommandLineRunner {
 
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         System.out.println("\n========================");
         System.out.println("===    SELECT ALL    ===");
@@ -242,6 +244,29 @@ public class StartUp implements CommandLineRunner {
         System.out.println("===       TP05 TERMINE !       ===");
         System.out.println("=============================\n");
 
+
+
+
+        System.out.println("\n=============================");
+        System.out.println("===       TP06       ===");
+        System.out.println("=============================\n");
+
+            System.out.println("=== generateRandomPersons(5) ===");
+            personRepo.generateRandomPersons(5);
+
+            System.out.println("Liste après génération :");
+            personRepo.findAll().forEach(System.out::println);
+
+            System.out.println("\n=== deletePersonsWithoutAnimals() ===");
+
+            personRepo.deletePersonsWithoutAnimals();
+
+            System.out.println("Liste après suppression :");
+            personRepo.findAll().forEach(System.out::println);
+
+        System.out.println("\n=============================");
+        System.out.println("===       TP06 TERMINE !       ===");
+        System.out.println("=============================\n");
 
 
     }
