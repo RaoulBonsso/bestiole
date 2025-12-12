@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Integer>, PersonRepositoryCustom {
+    Person findByLogin(String login);
     List<Person> findByLastnameOrFirstname(String lastname, String firstname);
     List<Person> findByAgeGreaterThanEqual(Integer age);
 
